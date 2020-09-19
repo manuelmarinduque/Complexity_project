@@ -1,5 +1,5 @@
 import pandas as pd
-import gekko as gk
+# import gekko as gk
 
 class LinearProgramming():
     
@@ -17,8 +17,16 @@ class LinearProgramming():
         df = pd.DataFrame(info, columns=('Población', 'Estaciones', 'Personal', 'Costos', 'Muertes'))
         return df
 
+    def estacionesPorHabitantes(self, tabla):
+        estaciones = tabla['Estaciones']
+        poblacion = tabla['Población']
+        resultado = estaciones.div(poblacion, axis=0)
+        tabla['est*hab'] = resultado
+        return tabla
+
 objec = LinearProgramming(4)
 table = objec.generarTabla()
-print(table)
+result = objec.estacionesPorHabitantes(table)
+print(result)
     
 
