@@ -1,0 +1,9 @@
+# Proyecto de complejidad
+
+Se busca determinar la cantidad de ventiladores mecánicos que deben asignarse a cada región para la ampliación de las estaciones de cuidados intensivos, para lo cual se ha diseñado una escala de valoración del beneficio que obtendría cada una de estas regiones dependiendo de la proporción de estaciones por número de habitantes así: la región con mejor proporción tendrá un beneficio de 1, la siguiente tendrá un beneficio de 2, y así sucesivamente hasta que la región con menor proporción de estaciones por número de habitantes tendrá un beneficio de 7. Es importante tener en cuenta que se tiene un total de 1000 ventiladores para distribuir, los cuales fueron recibidos por parte de una ONG internacional y que, en la distribución, las dos regiones con más muertes por millón de habitantes deben recibir dos ventiladores por cada nueva estación de cuidados intensivos, mientras que las otras regiones reciben uno por estación.
+
+Dadas las características particulares de cada región hacen que el número de profesionales requeridos por cada estación de cuidados intensivos sea diferente, esto se muestra en la tercera columna de la tabla 1, pero el número total de estos equipos no debe superar los 2000.
+
+La instalación de cada estación de cuidados intensivos tiene un costo asociado que también varía según la región, en la columna 4 de la tabla 1 se puede verificar este costo, teniendo en cuenta que el presupuesto máximo para estas instalaciones es de 3500 millones de pesos. 
+
+Finalmente, algunas regiones donde habitan las comunidades más desfavorecidas, tienen un factor adicional de cualificación por cantidad de ventiladores asignados, las cualificaciones se presentan en la tabla 2, y el total acumulado de cualificación debe ser de, al menos 1000 puntos.
