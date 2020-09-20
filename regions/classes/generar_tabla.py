@@ -42,7 +42,7 @@ class LinearProgramming():
         indices1 = [2,2]
         indices2 = [1 for i in range(0, len(tabla2['Muertes'])-2)]
         indices = indices1+indices2
-        tabla2['Beneficio'] = indices
+        tabla2['Ventiladores'] = indices
         return tabla2.sort_index()
 
         
