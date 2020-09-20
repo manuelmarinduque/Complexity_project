@@ -20,13 +20,40 @@ class LinearProgramming():
     def estacionesPorHabitantes(self, tabla):
         estaciones = tabla['Estaciones']
         poblacion = tabla['Población']
-        resultado = estaciones.div(poblacion, axis=0)
+        resultado = estaciones.div(poblacion)
         tabla['est*hab'] = resultado
         return tabla
+
+    def muertesPorMillon(self, tabla):
+        muertes = tabla['Muertes']
+        poblacion = tabla['Población'].mul(100000)
+        resultado = muertes.div(poblacion).mul(1000000)
+        tabla["Muertes*millon"] = resultado
+        return tabla
+
+    def beneficio(self, tabla):
+        tabla2 = tabla.sort_values('est*hab', ascending = False) 
+        indices = indices = [i for i in range(1,8)]
+        tabla2['Beneficio'] = indices
+        return tabla2.sort_index()
+
+    def ventiladores(self, tabla):
+        tabla2 = tabla.sort_values('Muertes*millon', ascending = False) 
+        indices1 = [2,2]
+        indices2 = [1 for i in range(0, len(tabla2['Muertes'])-2)]
+        indices = indices1+indices2
+        tabla2['Beneficio'] = indices
+        return tabla2.sort_index()
+
+        
 
 objec = LinearProgramming(4)
 table = objec.generarTabla()
 result = objec.estacionesPorHabitantes(table)
-print(result)
+result2 = objec.muertesPorMillon(result)
+result3 = objec.beneficio(result2)
+result4 = objec.ventiladores(result3)
+print(result4)
+
     
 
