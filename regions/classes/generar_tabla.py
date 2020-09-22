@@ -6,15 +6,8 @@ class LinearProgramming():
     def __init__(self, num_regiones):
         self.__num_regiones = num_regiones
 
-    def construirTabla(self):
-        info = [[50, 1000, 2, 5000000, 550, 0], 
-                [25, 100, 4, 4000000, 350, 4], 
-                [90, 3000, 1, 4000000, 2600, 0],
-                [40, 500, 1, 1500000, 1000, 0],
-                [35, 700, 1, 5000000, 300, 2],
-                [22, 80, 3, 3500000, 250, 0],
-                [30, 60, 2, 4500000, 300, 3]]
-        tabla = pd.DataFrame(info, columns=('Población', 'Estaciones', 'Personal', 'Costos', 'Muertes', 'Cualificacion'))
+    def construirTabla(self, informacion):
+        tabla = pd.DataFrame(informacion, columns=('Población', 'Estaciones', 'Personal', 'Costos', 'Muertes', 'Cualificacion'))
         return tabla
 
     def __estacionesPorHabitantes(self, tabla):
