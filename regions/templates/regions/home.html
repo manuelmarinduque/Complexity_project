@@ -13,11 +13,35 @@
 </div>
 
 <div>
+
+    {% if 'distribucionVentiladores' %}
+
+        {% for valor in distribucionVentiladores %}
+            {% if  valor != 0 %}
+                <p> A la región {{forloop.counter}} le corresponden {{ valor }} ventiladores </p>
+            {% endif %}
+        {% endfor %}
     
-    {% if 'num_regions' %}
-        {{ num_regions }}
+        {% for valor in distribucionProfesionales %}
+            {% if  valor != 0 %}
+                <p> A la región {{forloop.counter}} le corresponden {{ valor }} profesionales de la salud </p>
+            {% endif %}
+        {% endfor %}
+    
+        {% for valor in distribucionPresupuesto %}
+            {% if  valor != 0 %}
+                <p> A la región {{forloop.counter}} le corresponden {{ valor }} millones de pesos </p>
+            {% endif %}
+        {% endfor %}
+    
+        {% for valor in distribucionCualificacion %}
+            {% if  valor != 0 %}
+                <p> A la región {{forloop.counter}} le corresponde {{ valor }} de cualificación </p>
+            {% endif %}
+        {% endfor %}
+
     {% endif %}
-        
+
 </div>
 
 {% endblock contents %}
