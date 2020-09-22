@@ -17,7 +17,7 @@ def modelPage(request, numero_regiones):
     objeto = LinearProgramming(num_regiones=7)
     tabla = objeto.construirTabla()
     tabla_modelo = objeto.generarTabla(tabla)
-    valores_regiones, maximo_valor = objeto.modelo(tabla_modelo)
+    valores_regiones, maximo_valor = objeto.modelo(tabla_modelo, 1000, 2000, 3500000000, 1000)
     distribucionVentiladores, distribucionProfesionales, distribucionPresupuesto, distribucionCualificacion = objeto.distribucionElementos(valores_regiones, tabla_modelo)
     return render(request, 'regions/home.html', {
         'distribucionVentiladores':distribucionVentiladores,

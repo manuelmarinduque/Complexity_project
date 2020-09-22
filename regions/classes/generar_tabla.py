@@ -78,7 +78,7 @@ class LinearProgramming():
             cualificacion += contenido[5]*contenido[0]
         return variables_regiones, funcion_objetivo, ventiladores, personal, costo, cualificacion
     
-    def modelo(self, tabla, total_ventiladores=1000, total_personal=2000, total_costo=3500000000, total_cualificacion=1000):
+    def modelo(self, tabla, total_ventiladores, total_personal, total_costo, total_cualificacion):
         tabla_modelo = self.__generarTablaModelo(tabla)
         regiones, funcion_objetivo, ventiladores, personal, costo, cualificacion = self.__variablesModelo(tabla_modelo)
         model = LpProblem('Modelo_proyecto', LpMaximize)
