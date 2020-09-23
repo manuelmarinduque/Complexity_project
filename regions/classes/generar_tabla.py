@@ -3,8 +3,8 @@ from pulp import LpProblem, LpMaximize, LpVariable, LpStatus, value
 
 class LinearProgramming():
     
-    def __init__(self, num_regiones):
-        self.__num_regiones = num_regiones
+    def __init__(self, numero_regiones):
+        self.__numero_regiones = numero_regiones
 
     def construirTabla(self, informacion):
         tabla = pd.DataFrame(informacion, columns=('Población', 'Estaciones', 'Personal', 'Costos', 'Muertes', 'Cualificacion'))
@@ -46,14 +46,14 @@ class LinearProgramming():
         return tabla
 
     def __generarTablaModelo(self, tabla):
-        variables_regiones = [LpVariable(f'x{i}', lowBound=0, cat='Integer') for i in range (1, self.__num_regiones + 1)]
+        variables_regiones = [LpVariable(f'x{i}', lowBound=0, cat='Integer') for i in range (1, self.__numero_regiones + 1)]
         beneficio = tabla['Beneficio'].values
         ventiladores = tabla['Ventiladores'].values
         personal = tabla['Personal'].values
         costos = tabla['Costos'].values
         cualificacion = tabla['Cualificacion'].values
         info = [variables_regiones, beneficio, ventiladores, personal, costos, cualificacion]
-        tabla_modelo = pd.DataFrame(info, columns=[f'Region{i}' for i in range(1, self.__num_regiones + 1)])
+        tabla_modelo = pd.DataFrame(info, columns=[f'Region{i}' for i in range(1, self.__numero_regiones + 1)])
         return tabla_modelo, variables_regiones
     
     def __variablesModelo(self, tabla):
@@ -71,15 +71,15 @@ class LinearProgramming():
             cualificacion += contenido[5]*contenido[0]
         return variables_regiones, funcion_objetivo, ventiladores, personal, costo, cualificacion
     
-    def modelo(self, tabla, total_ventiladores, total_personal, total_costo, total_cualificacion):
+    def modelo(self, tabla, dict_info):
         tabla_modelo = self.__generarTablaModelo(tabla)
         regiones, funcion_objetivo, ventiladores, personal, costo, cualificacion = self.__variablesModelo(tabla_modelo)
         model = LpProblem('Modelo_proyecto', LpMaximize)
         model += funcion_objetivo
-        model += ventiladores <= total_ventiladores
-        model += personal <= total_personal
-        model += costo <= total_costo
-        model += cualificacion >= total_cualificacion
+        model += ventiladores <= int(dict_info.get('total_ventiladores'))
+        model += personal <= int(dict_info.get('total_personal'))
+        model += costo <= int(dict_info.get('presupuesto'))
+        model += cualificacion >= int(dict_info.get('total_cualificacion'))
         model.solve()
         valores_regiones = (value(regiones[0]), value(regiones[1]), value(regiones[2]), value(regiones[3]), value(regiones[4]), value(regiones[5]), value(regiones[6]))
         return valores_regiones, value(model.objective)
