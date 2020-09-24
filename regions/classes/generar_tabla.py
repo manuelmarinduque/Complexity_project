@@ -26,7 +26,7 @@ class LinearProgramming():
 
     def __beneficio(self, tabla):
         tabla2 = tabla.sort_values('est*hab', ascending = False) 
-        indices = indices = [i for i in range(1,8)]
+        indices = indices = [i for i in range(1, self.__numero_regiones + 1)]
         tabla2['Beneficio'] = indices
         return tabla2.sort_index()
 
@@ -46,7 +46,7 @@ class LinearProgramming():
         return tabla
 
     def __generarTablaModelo(self, tabla):
-        variables_regiones = [LpVariable(f'x{i}', lowBound=0, cat='Integer') for i in range (1, self.__numero_regiones + 1)]
+        variables_regiones = [LpVariable(f'x{i}', lowBound=0, cat='Integer') for i in range(1, self.__numero_regiones + 1)]
         beneficio = tabla['Beneficio'].values
         ventiladores = tabla['Ventiladores'].values
         personal = tabla['Personal'].values
@@ -81,7 +81,7 @@ class LinearProgramming():
         model += costo <= int(dict_info.get('presupuesto'))
         model += cualificacion >= int(dict_info.get('total_cualificacion'))
         model.solve()
-        valores_regiones = (value(regiones[0]), value(regiones[1]), value(regiones[2]), value(regiones[3]), value(regiones[4]), value(regiones[5]), value(regiones[6]))
+        valores_regiones = [value(regiones[i]) for i in range(0, self.__numero_regiones)]
         return valores_regiones, value(model.objective)
     
     def distribucionElementos(self, valores_regiones, tabla):

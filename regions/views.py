@@ -21,9 +21,7 @@ def homePage(request):
         }
         region = Region(**informacion)
         region.save()
-        return render(request, 'regions/home.html', {'regiones': regiones})
-    else:
-        return render(request, 'regions/home.html', {'regiones': regiones})
+    return render(request, 'regions/home.html', {'regiones': regiones})
 
 def modelPage(request):
     regiones = Region.objects.all()
@@ -40,3 +38,7 @@ def modelPage(request):
         'distribucionCualificacion':distribucionCualificacion,
         'regiones': regiones,
         })
+
+def reinicioPage(request):
+    Region.objects.all().delete()
+    return HttpResponseRedirect(reverse('regions:home_page'))

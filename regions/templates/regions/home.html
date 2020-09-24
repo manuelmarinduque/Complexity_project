@@ -47,7 +47,8 @@
                 {% endfor %}
             </table>
         </div>
-        <div> <input type="text" name="total_ventiladores" placeholder="Total de ventiladores a distribuír" required> </div>
+        <div> <input type="text" name="total_ventiladores" placeholder="Total de ventiladores a distribuír" required>
+        </div>
         <div> <input type="text" name="total_personal" placeholder="Personal disponible" required> </div>
         <div> <input type="text" name="presupuesto" placeholder="Presupuesto" required> </div>
         <div> <input type="text" name="total_cualificacion" placeholder="Cualificación" required> </div>
@@ -58,33 +59,39 @@
 
 <div>
 
-    {% if 'distribucionVentiladores' %}
+    <form action="{% url 'regions:reinicio_page' %}" method="post">
+        {% csrf_token %}
+        {% if 'distribucionVentiladores' %}
 
-    {% for valor in distribucionVentiladores %}
-    {% if  valor != 0 %}
-    <p> A la región {{forloop.counter}} le corresponden {{ valor }} ventiladores </p>
-    {% endif %}
-    {% endfor %}
+        {% for valor in distribucionVentiladores %}
+        {% if  valor != 0 %}
+        <p> A la región {{forloop.counter}} le corresponden {{ valor }} ventiladores </p>
+        {% endif %}
+        {% endfor %}
 
-    {% for valor in distribucionProfesionales %}
-    {% if  valor != 0 %}
-    <p> A la región {{forloop.counter}} le corresponden {{ valor }} profesionales de la salud </p>
-    {% endif %}
-    {% endfor %}
+        {% for valor in distribucionProfesionales %}
+        {% if  valor != 0 %}
+        <p> A la región {{forloop.counter}} le corresponden {{ valor }} profesionales de la salud </p>
+        {% endif %}
+        {% endfor %}
 
-    {% for valor in distribucionPresupuesto %}
-    {% if  valor != 0 %}
-    <p> A la región {{forloop.counter}} le corresponden {{ valor }} millones de pesos </p>
-    {% endif %}
-    {% endfor %}
+        {% for valor in distribucionPresupuesto %}
+        {% if  valor != 0 %}
+        <p> A la región {{forloop.counter}} le corresponden {{ valor }} millones de pesos </p>
+        {% endif %}
+        {% endfor %}
 
-    {% for valor in distribucionCualificacion %}
-    {% if  valor != 0 %}
-    <p> A la región {{forloop.counter}} le corresponde {{ valor }} de cualificación </p>
-    {% endif %}
-    {% endfor %}
+        {% for valor in distribucionCualificacion %}
+        {% if  valor != 0 %}
+        <p> A la región {{forloop.counter}} le corresponde {{ valor }} de cualificación </p>
+        {% endif %}
+        {% endfor %}
 
-    {% endif %}
+        {% endif %}
+
+        <div> <input type="submit" value="Nuevo modelo"> </div>
+
+    </form>
 
 </div>
 
