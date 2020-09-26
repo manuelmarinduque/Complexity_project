@@ -4,18 +4,20 @@
 
 {% block contents %}
 
-<div>
+<div class="mx-auto" style="width: 200px;">
     <form action="{% url 'regions:home_page' %}" method="post">
         {% csrf_token %}
-        <div> <input class="form-control-sm" type="text" name="name" placeholder="Nombre de la región" required> </div>
-        <div> <input class="form-control-sm" type="text" name="poblacion" placeholder="Población actual" required> </div>
-        <div> <input class="form-control-sm" type="text" name="estaciones_actuales" placeholder="Estaciones actuales" required> </div>
-        <div> <input class="form-control-sm" type="text" name="personal_requerido" placeholder="Personal requerido" required> </div>
-        <div> <input class="form-control-sm" type="text" name="costos" placeholder="Costos que genera" required> </div>
-        <div> <input class="form-control-sm" type="text" name="muertes" placeholder="Muertes" required> </div>
-        <div> <input class="form-control-sm" type="text" name="cualificacion" placeholder="Cualificación" required> </div>
-        <div> <input class="form-control-sm" type="submit" value="Ingresar"> </div>
-    </form>
+        <div class="form-group">
+            <div> <input class="form-control" type="text" name="name" placeholder="Nombre de la región" required> </div>
+            <div> <input class="form-control" type="text" name="poblacion" placeholder="Población actual" required> </div>
+            <div> <input class="form-control" type="text" name="estaciones_actuales" placeholder="Estaciones actuales" required> </div>
+            <div> <input class="form-control" type="text" name="personal_requerido" placeholder="Personal requerido" required> </div>
+            <div> <input class="form-control" type="text" name="costos" placeholder="Costos que genera" required> </div>
+            <div> <input class="form-control" type="text" name="muertes" placeholder="Muertes" required> </div>
+            <div> <input class="form-control" type="text" name="cualificacion" placeholder="Cualificación" required> </div>
+            <button type="submit" class="btn btn-primary">Ingresar</button>
+        </form>
+    </div>
 </div>
 
 <div>
