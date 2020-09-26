@@ -43,6 +43,7 @@ class LinearProgramming():
         tabla = self.__muertesPorMillon(tabla)
         tabla = self.__beneficio(tabla)
         tabla = self.__ventiladores(tabla)
+        print(tabla)
         return tabla
 
     def __generarTablaModelo(self, tabla):
