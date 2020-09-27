@@ -1,39 +1,55 @@
 {% extends 'regions/base.html' %}
 
-{% block title %} Home {% endblock title %}
+{% block title %} Corona Complejidad {% endblock title %}
 
 {% block contents %}
 
-<div class="mx-auto" style="width: 200px;">
-    <form action="{% url 'regions:home_page' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <div> <input class="form-control" type="text" name="name" placeholder="Nombre de la región" required> </div>
-            <div> <input class="form-control" type="text" name="poblacion" placeholder="Población actual" required> </div>
-            <div> <input class="form-control" type="text" name="estaciones_actuales" placeholder="Estaciones actuales" required> </div>
-            <div> <input class="form-control" type="text" name="personal_requerido" placeholder="Personal requerido" required> </div>
-            <div> <input class="form-control" type="text" name="costos" placeholder="Costos que genera" required> </div>
-            <div> <input class="form-control" type="text" name="muertes" placeholder="Muertes" required> </div>
-            <div> <input class="form-control" type="text" name="cualificacion" placeholder="Cualificación" required> </div>
-            <button type="submit" class="btn btn-primary">Ingresar</button>
+<div class="row">
+    <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
+        <form action="{% url 'regions:home_page' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <div> <input class="form-control" type="text" name="name" placeholder="Nombre de la región" required> </div>
+                <div> <input class="form-control" type="text" name="poblacion" placeholder="Población actual" required> </div>
+                <div> <input class="form-control" type="text" name="estaciones_actuales" placeholder="Estaciones actuales" required> </div>
+                <div> <input class="form-control" type="text" name="personal_requerido" placeholder="Personal requerido" required> </div>
+                <div> <input class="form-control" type="text" name="costos" placeholder="Costos que genera" required> </div>
+                <div> <input class="form-control" type="text" name="muertes" placeholder="Muertes" required> </div>
+                <div> <input class="form-control" type="text" name="cualificacion" placeholder="Cualificación" required> </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%">Ingresar</button>
+            </div>
         </form>
     </div>
+
+    <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
+        <form action="{% url 'regions:model_page' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <div> <input class="form-control" type="text" name="total_ventiladores" placeholder="Total de ventiladores a distribuír" required></div>
+                <div> <input class="form-control" type="text" name="total_personal" placeholder="Personal disponible" required> </div>
+                <div> <input class="form-control" type="text" name="presupuesto" placeholder="Presupuesto" required> </div>
+                <div> <input class="form-control" type="text" name="total_cualificacion" placeholder="Cualificación" required> </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Generar modelo</button>
+            </div>
+        </form>
+    </div>
+
 </div>
 
-<div>
-    {% if 'regiones' %}
-    <form action="{% url 'regions:model_page' %}" method="post">
-        {% csrf_token %}
+<div class="row">
+
+    <div class="col-7" style="margin-left: 1%;">
+        {% if 'regiones' %}
         <div>
-            <table>
+            <table class="table table-striped" >
                 <tr>
-                    <th>Región</th>
-                    <th>Población</th>
-                    <th>Estaciones actuales</th>
-                    <th>Personal requerido</th>
-                    <th>Costos</th>
-                    <th>Muertes</th>
-                    <th>Cualificación</th>
+                    <th scope="col">Región</th>
+                    <th scope="col">Población</th>
+                    <th scope="col">Estaciones actuales</th>
+                    <th scope="col">Personal requerido</th>
+                    <th scope="col">Costos</th>
+                    <th scope="col">Muertes</th>
+                    <th scope="col">Cualificación</th>
                 </tr>
 
                 {% for region in regiones %}
@@ -49,41 +65,34 @@
                 {% endfor %}
             </table>
         </div>
-        <div> <input type="text" name="total_ventiladores" placeholder="Total de ventiladores a distribuír" required>
-        </div>
-        <div> <input type="text" name="total_personal" placeholder="Personal disponible" required> </div>
-        <div> <input type="text" name="presupuesto" placeholder="Presupuesto" required> </div>
-        <div> <input type="text" name="total_cualificacion" placeholder="Cualificación" required> </div>
-        <div> <input type="submit" value="Generar modelo"> </div>
-    </form>
-    {% endif %}
-</div>
+        {% endif %}
+    </div>
 
-<div>
 
-    <form action="{% url 'regions:reinicio_page' %}" method="post">
-        {% csrf_token %}
+    <div class="col-4">
+        
+        <h1 style="margin-bottom: 25px">RESULTADOS</h2>
         {% if 'distribucionVentiladores' %}
         <div class="form-group">
-            
+
             {% for valor in distribucionVentiladores %}
             {% if  valor != 0 %}
             <p> A la región {{forloop.counter}} le corresponden {{ valor }} ventiladores </p>
             {% endif %}
             {% endfor %}
-            
+
             {% for valor in distribucionProfesionales %}
             {% if  valor != 0 %}
             <p> A la región {{forloop.counter}} le corresponden {{ valor }} profesionales de la salud </p>
             {% endif %}
             {% endfor %}
-            
+
             {% for valor in distribucionPresupuesto %}
             {% if  valor != 0 %}
             <p> A la región {{forloop.counter}} le corresponden {{ valor }} millones de pesos </p>
             {% endif %}
             {% endfor %}
-            
+
             {% for valor in distribucionCualificacion %}
             {% if  valor != 0 %}
             <p> A la región {{forloop.counter}} le corresponde {{ valor }} de cualificación </p>
@@ -91,12 +100,17 @@
             {% endfor %}
             
             {% endif %}
-            
-            <div> <input type="submit" value="Nuevo modelo"> </div>
         </div>
-
-    </form>
-
+    </div>     
 </div>
+
+
+<div class="row mx-auto">
+    <form style="width: 100%" action="{% url 'regions:reinicio_page' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary" style="width: 60%; margin-left: 20%; margin-top: 40px; margin-bottom: 30px;">Nuevo modelo</button>
+    </form>  
+</div>
+
 
 {% endblock contents %}
