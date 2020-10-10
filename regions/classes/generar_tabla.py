@@ -81,6 +81,7 @@ class LinearProgramming():
         model += personal <= int(dict_info.get('total_personal'))
         model += costo <= int(dict_info.get('presupuesto'))
         model += cualificacion >= int(dict_info.get('total_cualificacion'))
+        print(model)
         model.solve()
         valores_regiones = [value(regiones[i]) for i in range(0, self.__numero_regiones)]
         return valores_regiones, value(model.objective)
