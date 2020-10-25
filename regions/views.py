@@ -4,8 +4,14 @@ from django.urls import reverse
 from .classes.generar_tabla import LinearProgramming
 from .models import Region
 
+from django.views.generic import TemplateView
+from .forms import FormData, RegionForm
+
 # Create your views here.
 
+class HomePage(TemplateView):
+    template_name = 'regions/home.html'
+    extra_context = {'form': FormData, 'regionform': RegionForm}
 
 def homePage(request):
     regiones = Region.objects.all()
@@ -41,4 +47,4 @@ def modelPage(request):
 
 def reinicioPage(request):
     Region.objects.all().delete()
-    return HttpResponseRedirect(reverse('regions:home_page'))
+    return HttpResponseRedirect(reverse('regions:home_page2'))

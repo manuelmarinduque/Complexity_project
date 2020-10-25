@@ -14,13 +14,7 @@
         <form action="{% url 'regions:home_page' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <div> <input class="form-control" type="text" name="name" placeholder="Nombre de la región" required> </div>
-                <div> <input class="form-control" type="text" name="poblacion" placeholder="Población actual" required> </div>
-                <div> <input class="form-control" type="text" name="estaciones_actuales" placeholder="Estaciones actuales" required> </div>
-                <div> <input class="form-control" type="text" name="personal_requerido" placeholder="Personal requerido" required> </div>
-                <div> <input class="form-control" type="text" name="costos" placeholder="Costos que genera" required> </div>
-                <div> <input class="form-control" type="text" name="muertes" placeholder="Muertes" required> </div>
-                <div> <input class="form-control" type="text" name="cualificacion" placeholder="Cualificación" required> </div>
+                {{ regionform.as_p }}
                 <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%">Ingresar</button>
             </div>
         </form>
@@ -30,10 +24,7 @@
         <form action="{% url 'regions:model_page' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <div> <input class="form-control" type="text" name="total_ventiladores" placeholder="Total de ventiladores a distribuír" required></div>
-                <div> <input class="form-control" type="text" name="total_personal" placeholder="Personal disponible" required> </div>
-                <div> <input class="form-control" type="text" name="presupuesto" placeholder="Presupuesto" required> </div>
-                <div> <input class="form-control" type="text" name="total_cualificacion" placeholder="Cualificación" required> </div>
+                {{ form.as_p}}
                 <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Generar modelo</button>
             </div>
         </form>
@@ -44,7 +35,6 @@
 <div class="row">
 
     <div class="col-7" style="margin-left: 1%;">
-        {% if 'regiones' %}
         <div>
             <table class="table table-striped" >
                 <tr>
