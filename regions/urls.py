@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import HomePage, modelPage, reinicioPage, homePage
+from .views import HomePage, RegionCreateView, LinearProgrammingModel, ReinicioPage
 
 # Create your urls here.
 
 app_name = 'regions'
 
 urlpatterns = [
-    path('home/', homePage, name='home_page'),
-    path('', HomePage.as_view(), name='home_page2'),
-    path('regions/', modelPage, name='model_page'),
-    path('regions/reiniciar', reinicioPage, name='reinicio_page'),
+    path('', HomePage.as_view(), name='home_page'),
+    path('region_create/', RegionCreateView.as_view(), name='create_region_page'),
+    path('lp_model/', LinearProgrammingModel.as_view(), name='lp_model_page'),
+    path('reiniciar', ReinicioPage.as_view(), name='reinicio_page'),
 ]

@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
-        <form action="{% url 'regions:home_page' %}" method="post">
+        <form action="{% url 'regions:create_region_page' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 {{ regionform.as_p }}
@@ -21,7 +21,7 @@
     </div>
 
     <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
-        <form action="{% url 'regions:model_page' %}" method="post">
+        <form action="{% url 'regions:lp_model_page' %}" method="get">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.as_p}}
@@ -49,18 +49,17 @@
 
                 {% for region in regiones %}
                 <tr>
-                    <td>{{ region.name }}</td>
-                    <td>{{ region.poblacion }}</td>
-                    <td>{{ region.estaciones_actuales }}</td>
-                    <td>{{ region.personal_requerido }}</td>
-                    <td>{{ region.costos }}</td>
-                    <td>{{ region.muertes }}</td>
-                    <td>{{ region.cualificacion }}</td>
+                    <td>{{ region.region_name }}</td>
+                    <td>{{ region.existing_population }}</td>
+                    <td>{{ region.current_personal }}</td>
+                    <td>{{ region.required_personal }}</td>
+                    <td>{{ region.generated_costs }}</td>
+                    <td>{{ region.deads }}</td>
+                    <td>{{ region.qualification }}</td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
-        {% endif %}
     </div>
 
 

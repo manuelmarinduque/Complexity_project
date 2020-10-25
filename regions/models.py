@@ -2,13 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Region(models.Model):
-    region_name = models.CharField(name= 'region name', max_length=20)
-    existing_population = models.IntegerField(name='existing population')
-    current_personal = models.IntegerField(name='current personal')
-    required_personal = models.IntegerField(name='required personal')
-    generated_costs = models.FloatField(name='generated costs')
-    deads = models.IntegerField(name='deads')
-    qualification = models.IntegerField(name='qualification')
+    region_name = models.CharField(verbose_name= 'region name', max_length=20)
+    existing_population = models.IntegerField(verbose_name='existing population')
+    current_personal = models.IntegerField(verbose_name='current personal')
+    required_personal = models.IntegerField(verbose_name='required personal')
+    generated_costs = models.FloatField(verbose_name='generated costs')
+    deads = models.IntegerField(verbose_name='deads')
+    qualification = models.IntegerField(verbose_name='qualification')
 
     class Meta:
         verbose_name = "Región"

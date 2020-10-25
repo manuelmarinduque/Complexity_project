@@ -77,10 +77,10 @@ class LinearProgramming():
         regiones, funcion_objetivo, ventiladores, personal, costo, cualificacion = self.__variablesModelo(tabla_modelo)
         model = LpProblem('Modelo_proyecto', LpMaximize)
         model += funcion_objetivo
-        model += ventiladores <= int(dict_info.get('total_ventiladores'))
-        model += personal <= int(dict_info.get('total_personal'))
-        model += costo <= int(dict_info.get('presupuesto'))
-        model += cualificacion >= int(dict_info.get('total_cualificacion'))
+        model += ventiladores <= int(dict_info.get('fans'))
+        model += personal <= int(dict_info.get('personal'))
+        model += costo <= int(dict_info.get('budget'))
+        model += cualificacion >= int(dict_info.get('qualification'))
         print(model)
         model.solve()
         valores_regiones = [value(regiones[i]) for i in range(0, self.__numero_regiones)]
