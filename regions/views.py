@@ -1,4 +1,5 @@
 from django.views.generic import ListView, CreateView, RedirectView
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from .models import Region
@@ -23,6 +24,15 @@ class RegionCreateView(CreateView):
     # No se podrá acceder a esta vista si se conoce la url, porque en ese caso se redirecciona a home_page
     def get(self, request, *args, **kwargs):
         return redirect('regions:home_page')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        mensaje = f'{self.model.__name__} registrada correctamente!'
+        return JsonResponse({'message': mensaje})
+
+    def form_invalid(self, form):
+        mensaje = f'La {self.model.__name__} no se ha podido registrar!'
+        return JsonResponse({'message': mensaje, 'error': form.errors})
 
 class LinearProgrammingModel(ListView):
     model = Region

@@ -1,33 +1,30 @@
 {% extends 'regions/base.html' %}
-
+{% load static %}
 {% block title %} Corona Complejidad {% endblock title %}
 
 {% block contents %}
 
-<div class="row">
-    <img class="col-10" src="../../static/regions/img/coronavirus.jpeg" style="width: 100%; height: 120px;">
-    <div class="col-2" style="background-color: #989391"></div>
-</div>
 
 <div class="row">
     <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
-        <form action="{% url 'regions:create_region_page' %}" method="post">
+        <div class="alert alert-success" role="alert" id="success_message"></div>
+        <form action="{% url 'regions:create_region_page' %}" method="post" id="region_form">
             {% csrf_token %}
             <div class="form-group">
                 {{ regionform.as_p }}
-                <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%">Ingresar</button>
             </div>
         </form>
+        <button onclick='SaveData("{{ csrf_token }}")' class="btn btn-primary" style="margin-top: 20px; width: 100%">Ingresar</button>
     </div>
 
     <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
-        <form action="{% url 'regions:lp_model_page' %}" method="get">
+        <form action="{% url 'regions:lp_model_page' %}" method="get" id="data_form">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.as_p}}
-                <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Generar modelo</button>
             </div>
         </form>
+        <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%;">Generar modelo</button>
     </div>
 
 </div>
@@ -47,7 +44,7 @@
                     <th scope="col">Cualificación</th>
                 </tr>
 
-                {% for region in regiones %}
+                <!-- {% for region in regiones %}
                 <tr>
                     <td>{{ region.region_name }}</td>
                     <td>{{ region.existing_population }}</td>
@@ -57,7 +54,7 @@
                     <td>{{ region.deads }}</td>
                     <td>{{ region.qualification }}</td>
                 </tr>
-                {% endfor %}
+                {% endfor %} -->
             </table>
         </div>
     </div>
@@ -106,5 +103,10 @@
     </form>  
 </div>
 
-
 {% endblock contents %}
+
+
+{% block extra_js %}
+    <script src="{% static 'regions/js/peticiones.js' %}"></script>
+{% endblock extra_js %}
+    
