@@ -1,5 +1,6 @@
 from django.views.generic import ListView, CreateView, RedirectView
-from django.http import JsonResponse
+from django.http import HttpResponse,JsonResponse
+from django.core.serializers import serialize
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from .models import Region
@@ -14,6 +15,15 @@ class HomePage(ListView):
     template_name = 'regions/home.html'
     context_object_name = 'regiones'
     extra_context = {'form': FormData, 'regionform': RegionForm}
+
+
+class RegionListView(ListView):
+    model = Region
+    
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        data = serialize('json', self.object_list)
+        return HttpResponse(data, 'application/json')
 
 
 class RegionCreateView(CreateView):

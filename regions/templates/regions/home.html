@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="mx-auto col-sm" style="width: 200px; padding: 65px;">
-        <div class="alert alert-success" role="alert" id="success_message"></div>
+        <div id="success_message"></div>
         <form action="{% url 'regions:create_region_page' %}" method="post" id="region_form">
             {% csrf_token %}
             <div class="form-group">
@@ -33,28 +33,32 @@
 
     <div class="col-7" style="margin-left: 1%;">
         <div>
-            <table class="table table-striped" >
-                <tr>
-                    <th scope="col">Región</th>
-                    <th scope="col">Población</th>
-                    <th scope="col">Estaciones actuales</th>
-                    <th scope="col">Personal requerido</th>
-                    <th scope="col">Costos</th>
-                    <th scope="col">Muertes</th>
-                    <th scope="col">Cualificación</th>
-                </tr>
+            <table class="table table-striped" id="data_table">
+                <thead>
+                    <tr>
+                        <th scope="col">Región</th>
+                        <th scope="col">Población</th>
+                        <th scope="col">Estaciones actuales</th>
+                        <th scope="col">Personal requerido</th>
+                        <th scope="col">Costos</th>
+                        <th scope="col">Muertes</th>
+                        <th scope="col">Cualificación</th>
+                    </tr>
+                </thead>
 
-                <!-- {% for region in regiones %}
-                <tr>
-                    <td>{{ region.region_name }}</td>
-                    <td>{{ region.existing_population }}</td>
-                    <td>{{ region.current_personal }}</td>
-                    <td>{{ region.required_personal }}</td>
-                    <td>{{ region.generated_costs }}</td>
-                    <td>{{ region.deads }}</td>
-                    <td>{{ region.qualification }}</td>
-                </tr>
-                {% endfor %} -->
+                <tbody>
+                    {% for region in regiones %}
+                        <tr>
+                            <td>{{ region.region_name }}</td>
+                            <td>{{ region.existing_population }}</td>
+                            <td>{{ region.current_personal }}</td>
+                            <td>{{ region.required_personal }}</td>
+                            <td>{{ region.generated_costs }}</td>
+                            <td>{{ region.deads }}</td>
+                            <td>{{ region.qualification }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>
